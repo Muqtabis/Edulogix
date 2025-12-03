@@ -24,7 +24,7 @@ const FinancesPage = () => {
   const stats = useMemo(() => {
     const totalCollected = recentPayments?.reduce((acc, p) => acc + Number(p.amount), 0) || 0;
     const totalPending = studentsWithUnpaidFees?.reduce((acc, student) => {
-      const unpaidTotal = student.fees?.reduce((sum: number, fee: any) => {
+      const unpaidTotal = student.fees?.reduce((sum: number, fee: { status: string; amount: number | string }) => {
         if (fee.status !== 'paid') return sum + Number(fee.amount);
         return sum;
       }, 0) || 0;
@@ -32,12 +32,12 @@ const FinancesPage = () => {
     }, 0) || 0;
 
     const paidStudents = allStudents?.filter(s => {
-      const hasUnpaidFees = s.fees?.some((fee: any) => fee.status !== 'paid');
+      const hasUnpaidFees = s.fees?.some((fee: { status: string }) => fee.status !== 'paid');
       return !hasUnpaidFees;
     }).length || 0;
 
     const overdueStudents = studentsWithUnpaidFees?.filter(s => {
-      return s.fees?.some((fee: any) => 
+      return s.fees?.some((fee: { status: string; due_date: string }) => 
         fee.status === 'overdue' || (new Date(fee.due_date) < new Date() && fee.status !== 'paid')
       );
     }).length || 0;
@@ -147,12 +147,12 @@ const FinancesPage = () => {
                 </TableHeader>
                 <TableBody>
                   {studentsWithUnpaidFees.map((student) => {
-                    const unpaidAmount = student.fees?.reduce((sum: number, fee: any) => {
+                    const unpaidAmount = student.fees?.reduce((sum: number, fee: { status: string; amount: number | string }) => {
                       if (fee.status !== 'paid') return sum + Number(fee.amount);
                       return sum;
                     }, 0) || 0;
                     
-                    const hasOverdue = student.fees?.some((fee: any) => 
+                    const hasOverdue = student.fees?.some((fee: { status: string; due_date: string }) => 
                       fee.status === 'overdue' || (new Date(fee.due_date) < new Date() && fee.status !== 'paid')
                     );
 

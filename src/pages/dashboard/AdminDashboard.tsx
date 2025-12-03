@@ -30,7 +30,7 @@ const AdminDashboard = () => {
   const totalFeesPending = useMemo(() => {
     if (!studentsWithUnpaidFees) return 0;
     return studentsWithUnpaidFees.reduce((acc, student) => {
-      const unpaidTotal = student.fees?.reduce((sum: number, fee: any) => {
+      const unpaidTotal = student.fees?.reduce((sum: number, fee: { status: string; amount: number | string }) => {
         if (fee.status !== 'paid') {
           return sum + Number(fee.amount);
         }
@@ -129,12 +129,12 @@ const AdminDashboard = () => {
             ) : (
               <div className="space-y-3">
                 {studentsWithUnpaidFees.slice(0, 5).map((student) => {
-                  const unpaidAmount = student.fees?.reduce((sum: number, fee: any) => {
+                  const unpaidAmount = student.fees?.reduce((sum: number, fee: { status: string; amount: number | string }) => {
                     if (fee.status !== 'paid') return sum + Number(fee.amount);
                     return sum;
                   }, 0) || 0;
                   
-                  const hasOverdue = student.fees?.some((fee: any) => 
+                  const hasOverdue = student.fees?.some((fee: { status: string; due_date: string }) => 
                     fee.status === 'overdue' || (new Date(fee.due_date) < new Date() && fee.status !== 'paid')
                   );
                   

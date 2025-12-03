@@ -41,13 +41,13 @@ const StudentsPage = () => {
     }
   };
 
-  const getFeeStatus = (student: any) => {
+  const getFeeStatus = (student: { fees?: Array<{ status: string; due_date: string }> }) => {
     if (!student.fees || student.fees.length === 0) return 'paid';
     
-    const unpaidFees = student.fees.filter((fee: any) => fee.status !== 'paid');
+    const unpaidFees = student.fees.filter((fee) => fee.status !== 'paid');
     if (unpaidFees.length === 0) return 'paid';
     
-    const hasOverdue = unpaidFees.some((fee: any) => {
+    const hasOverdue = unpaidFees.some((fee) => {
       return new Date(fee.due_date) < new Date() && fee.status !== 'paid';
     });
     
