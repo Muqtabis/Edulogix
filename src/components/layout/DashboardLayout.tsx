@@ -13,15 +13,15 @@ const DashboardLayout = ({
 }: DashboardLayoutProps) => {
   const {
     role,
-    logout,
+    signOut,
     userName
   } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const handleLogout = () => {
-    logout();
-    navigate('/');
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/auth');
   };
   const adminNav = [{
     icon: LayoutDashboard,

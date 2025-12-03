@@ -5,13 +5,30 @@ import StudentsPage from './StudentsPage';
 import TeachersPage from './TeachersPage';
 import FinancesPage from './FinancesPage';
 import AnnouncementsPage from './AnnouncementsPage';
+import { Loader2 } from 'lucide-react';
 
 const AdminSubPages = () => {
-  const { role } = useAuth();
+  const { user, role, loading } = useAuth();
   const location = useLocation();
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+
   if (!role) {
-    return <Navigate to="/" replace />;
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
   }
 
   const path = location.pathname;
