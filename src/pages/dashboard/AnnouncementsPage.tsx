@@ -5,42 +5,40 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Bell, Plus, Megaphone } from 'lucide-react';
-import { announcements as initialAnnouncements, Announcement } from '@/lib/mockData';
-import { useToast } from '@/hooks/use-toast';
+import { Bell, Plus, Megaphone, Loader2 } from 'lucide-react';
+import { useAnnouncements, useAddAnnouncement } from '@/hooks/api';
+import { toast } from 'sonner';
+import { useAuth } from '@/contexts/AuthContext';
+import { format } from 'date-fns';
 
 const AnnouncementsPage = () => {
-  const [announcements, setAnnouncements] = useState(initialAnnouncements);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const { toast } = useToast();
+  const { data: announcements, isLoading } = useAnnouncements();
+  const addAnnouncement = useAddAnnouncement();
+  const { user } = useAuth();
 
-  const handlePost = () => {
+  const handlePost = async () => {
     if (!title || !content) {
-      toast({
-        title: 'Missing Fields',
-        description: 'Please fill in both title and content.',
-        variant: 'destructive',
-      });
+      toast.error('Please fill in both title and content.');
       return;
     }
 
-    const newAnnouncement: Announcement = {
-      id: String(announcements.length + 1),
-      title,
-      content,
-      date: new Date().toISOString().split('T')[0],
-      author: 'Admin',
-    };
+    try {
+      await addAnnouncement.mutateAsync({
+        title,
+        content,
+        author_id: user?.id,
+        target_audience: ['admin', 'teacher', 'student'],
+      });
 
-    setAnnouncements([newAnnouncement, ...announcements]);
-    setTitle('');
-    setContent('');
-
-    toast({
-      title: 'Announcement Posted',
-      description: 'Your announcement has been published successfully.',
-    });
+      setTitle('');
+      setContent('');
+      toast.success('Announcement posted successfully!');
+    } catch (error) {
+      toast.error('Failed to post announcement');
+      console.error('Post error:', error);
+    }
   };
 
   return (
@@ -77,8 +75,16 @@ const AnnouncementsPage = () => {
                 onChange={(e) => setContent(e.target.value)}
               />
             </div>
-            <Button className="w-full" onClick={handlePost}>
-              <Plus className="h-4 w-4 mr-2" />
+            <Button 
+              className="w-full" 
+              onClick={handlePost}
+              disabled={addAnnouncement.isPending}
+            >
+              {addAnnouncement.isPending ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <Plus className="h-4 w-4 mr-2" />
+              )}
               Post Announcement
             </Button>
           </CardContent>
@@ -90,24 +96,36 @@ const AnnouncementsPage = () => {
             <CardTitle className="text-lg">All Announcements</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {announcements.map((announcement) => (
-              <div 
-                key={announcement.id} 
-                className="p-4 rounded-lg border border-border bg-card hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <Bell className="h-4 w-4 text-primary" />
-                    </div>
-                    <h3 className="font-semibold">{announcement.title}</h3>
-                  </div>
-                  <Badge variant="secondary">{announcement.date}</Badge>
-                </div>
-                <p className="text-muted-foreground text-sm ml-11">{announcement.content}</p>
-                <p className="text-xs text-muted-foreground mt-2 ml-11">Posted by {announcement.author}</p>
+            {isLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
               </div>
-            ))}
+            ) : !announcements || announcements.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-8">No announcements yet.</p>
+            ) : (
+              announcements.map((announcement) => (
+                <div 
+                  key={announcement.id} 
+                  className="p-4 rounded-lg border border-border bg-card hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-start justify-between gap-4 mb-2">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <Bell className="h-4 w-4 text-primary" />
+                      </div>
+                      <h3 className="font-semibold">{announcement.title}</h3>
+                    </div>
+                    <Badge variant="secondary">
+                      {format(new Date(announcement.created_at), 'MMM dd, yyyy')}
+                    </Badge>
+                  </div>
+                  <p className="text-muted-foreground text-sm ml-11">{announcement.content}</p>
+                  <p className="text-xs text-muted-foreground mt-2 ml-11">
+                    Posted by {announcement.profiles?.full_name || 'Admin'}
+                  </p>
+                </div>
+              ))
+            )}
           </CardContent>
         </Card>
       </div>
