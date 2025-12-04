@@ -7,6 +7,12 @@ A modern, full-stack school management system built with React, TypeScript, and 
 
 ---
 
+## 🚀 First Time Here?
+
+**👉 Start here: [START_HERE.md](./START_HERE.md)** - Simple 5-step guide to get running!
+
+---
+
 ## ✨ Features
 
 ### 👨‍💼 For Administrators
