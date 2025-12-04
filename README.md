@@ -44,6 +44,10 @@ A comprehensive, full-stack school management system built with modern web techn
 
 ### Installation
 
+For a **complete step-by-step setup guide**, see **[PROJECT_SETUP.md](./PROJECT_SETUP.md)** 📖
+
+Quick installation:
+
 ```bash
 # Clone the repository
 git clone https://github.com/Muqtabis/eduflow-suite.git
@@ -58,7 +62,7 @@ npm install
 cp .env.example .env
 # Edit .env with your Supabase credentials
 
-# Run database migrations (see DATABASE_SETUP.md)
+# Run database migrations (see PROJECT_SETUP.md or DATABASE_SETUP.md)
 
 # Start development server
 npm run dev
@@ -103,6 +107,8 @@ We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) 
 
 Comprehensive documentation is available:
 
+- **[PROJECT_SETUP.md](PROJECT_SETUP.md)** - 🚀 Complete setup guide (START HERE!)
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - 🔧 Fix common issues
 - **[USER_GUIDE.md](USER_GUIDE.md)** - Complete guide for all users
 - **[ADMIN_MANUAL.md](ADMIN_MANUAL.md)** - Administrator manual
 - **[DATABASE_SETUP.md](DATABASE_SETUP.md)** - Technical setup guide

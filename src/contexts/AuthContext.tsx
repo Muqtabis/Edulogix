@@ -84,47 +84,81 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    return { error };
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      
+      if (error) {
+        // Provide more user-friendly error messages
+        if (error.message.includes('Invalid login credentials')) {
+          return { error: new Error('Invalid email or password. Please try again.') };
+        } else if (error.message.includes('Email not confirmed')) {
+          return { error: new Error('Please confirm your email address before signing in.') };
+        }
+        return { error };
+      }
+      
+      return { error: null };
+    } catch (err) {
+      console.error('Sign in error:', err);
+      return { error: new Error('An unexpected error occurred during sign in. Please try again.') };
+    }
   };
 
   const signUp = async (email: string, password: string, fullName: string, selectedRole: UserRole) => {
-    const redirectUrl = `${window.location.origin}/`;
-    
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: redirectUrl,
-        data: {
-          full_name: fullName,
+    try {
+      const redirectUrl = `${window.location.origin}/`;
+      
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            full_name: fullName,
+          },
         },
-      },
-    });
+      });
 
-    if (error) {
-      return { error };
-    }
-
-    // If signup successful and we have a user, assign the role
-    if (data.user && selectedRole) {
-      const { error: roleError } = await supabase
-        .from('user_roles')
-        .insert({
-          user_id: data.user.id,
-          role: selectedRole,
-        });
-
-      if (roleError) {
-        console.error('Error assigning role:', roleError);
-        return { error: new Error('Account created but role assignment failed. Please contact support.') };
+      if (error) {
+        // Provide more user-friendly error messages
+        if (error.message.includes('already registered') || error.message.includes('already been registered')) {
+          return { error: new Error('This email is already registered. Please sign in instead.') };
+        } else if (error.message.includes('Password')) {
+          return { error: new Error('Password must be at least 6 characters long.') };
+        }
+        return { error };
       }
-    }
 
-    return { error: null };
+      // If signup successful and we have a user, assign the role
+      if (data.user && selectedRole) {
+        const { error: roleError } = await supabase
+          .from('user_roles')
+          .insert({
+            user_id: data.user.id,
+            role: selectedRole,
+          });
+
+        if (roleError) {
+          console.error('Error assigning role:', roleError);
+          // Even if role assignment fails, the account is created
+          // User can contact support to have role assigned manually
+          return { 
+            error: new Error(
+              'Account created successfully, but there was an issue assigning your role. ' +
+              'Please contact support or try signing in. Your email: ' + email
+            ) 
+          };
+        }
+      }
+
+      return { error: null };
+    } catch (err) {
+      console.error('Sign up error:', err);
+      return { error: new Error('An unexpected error occurred during sign up. Please try again.') };
+    }
   };
 
   const signOut = async () => {

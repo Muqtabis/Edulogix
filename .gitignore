@@ -60,6 +60,7 @@ Desktop.ini
 !.yarn/versions
 .npm
 .eslintcache
+bun.lockb
 
 # Misc
 *.bak
