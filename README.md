@@ -1,131 +1,193 @@
-# EduFlow Suite - Complete School Management System
+# 🎓 EduLogix - School Management System
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Muqtabis/eduflow-suite)
+A modern, full-stack school management system built with React, TypeScript, and Supabase.
+
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-18.3-blue)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF)](https://vitejs.dev/)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Security](https://img.shields.io/badge/security-policy-blue)](SECURITY.md)
 
-A comprehensive, full-stack school management system built with modern web technologies. EduFlow Suite provides complete solutions for managing students, teachers, academics, finances, and communications in educational institutions.
+---
 
-## 🌟 Features
+## 🚀 First Time Here?
+
+**👉 Start here: [START_HERE.md](./START_HERE.md)** - Simple 5-step guide to get running!
+
+---
+
+## ✨ Features
 
 ### 👨‍💼 For Administrators
-- **Student Management** - Complete student records with grades, attendance, and fees
-- **Teacher Management** - Staff profiles, class assignments, and schedules
-- **Financial Tracking** - Fee management, payment tracking, and financial reports
-- **System Analytics** - Real-time statistics and comprehensive reports
-- **User Management** - Role-based access control and permissions
+- Complete student and teacher management
+- Financial tracking (fees, payments, reports)
+- System analytics and dashboards
+- Announcements and communications
+- Class and schedule management
 
 ### 👨‍🏫 For Teachers
-- **Class Management** - View assigned classes and schedules
-- **Attendance Tracking** - Mark and monitor daily attendance
-- **Grade Entry** - Record and manage student grades
-- **Assignment Creation** - Create and distribute homework and projects
-- **Student Progress** - Track individual and class performance
+- Class and student management
+- Attendance tracking
+- Grade entry and management
+- Assignment creation and distribution
+- Student progress monitoring
 
 ### 👨‍🎓 For Students
-- **Academic Dashboard** - View grades, GPA, and academic progress
-- **Class Schedule** - Weekly timetable with all classes
-- **Announcements** - Stay updated with school notices
-- **Fee Status** - Check payment status and dues
-- **Attendance Record** - Monitor attendance history
+- View grades and GPA
+- Check class schedules
+- Read announcements
+- Monitor attendance
+- Check fee payment status
+
+---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm or yarn
-- Supabase account (for database)
-
-### Installation
-
-For a **complete step-by-step setup guide**, see **[PROJECT_SETUP.md](./PROJECT_SETUP.md)** 📖
-
-Quick installation:
-
+### 1️⃣ Install Dependencies
 ```bash
-# Clone the repository
-git clone https://github.com/Muqtabis/eduflow-suite.git
-
-# Navigate to project directory
-cd eduflow-suite
-
-# Install dependencies
 npm install
+```
 
-# Set up environment variables
+### 2️⃣ Setup Credentials
+**→ See [WHERE_TO_ADD_CREDENTIALS.md](./WHERE_TO_ADD_CREDENTIALS.md)** for exact location
+
+**Quick version:**
+```bash
+# 1. Copy the template
 cp .env.example .env
-# Edit .env with your Supabase credentials
 
-# Run database migrations (see PROJECT_SETUP.md or DATABASE_SETUP.md)
+# 2. Get your Supabase credentials from https://supabase.com
+# 3. Open .env and replace the placeholder values
+# 4. Save the file
+```
 
-# Start development server
+Detailed guide: [CREDENTIALS.md](./CREDENTIALS.md)
+
+### 3️⃣ Setup Database
+Run the SQL migrations in your Supabase dashboard (see [SETUP.md](./SETUP.md))
+
+### 4️⃣ Start the App
+```bash
 npm run dev
 ```
+Open: http://localhost:5173
 
-The application will be available at `http://localhost:5173`
-
-### Building for Production
-
-```bash
-npm run build
-npm run preview
-```
-
-## 🛠️ Development
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint issues
-- `npm run type-check` - Run TypeScript type checking
-- `npm run format` - Format code with Prettier
-- `npm run format:check` - Check code formatting
-
-### Code Quality
-
-The project uses several tools to maintain code quality:
-
-- **ESLint** - JavaScript/TypeScript linting
-- **Prettier** - Code formatting
-- **TypeScript** - Static type checking
-- **GitHub Actions** - Automated CI/CD pipeline
-
-### Contributing
-
-We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
+---
 
 ## 📚 Documentation
 
-Comprehensive documentation is available:
+| Document | Purpose |
+|----------|---------|
+| **[SETUP.md](./SETUP.md)** | Complete setup guide - start here! |
+| **[CREDENTIALS.md](./CREDENTIALS.md)** | How to add your Supabase credentials |
+| **[USER_GUIDE.md](./USER_GUIDE.md)** | How to use all features |
+| **[ADMIN_MANUAL.md](./ADMIN_MANUAL.md)** | Administrator features guide |
 
-- **[PROJECT_SETUP.md](PROJECT_SETUP.md)** - 🚀 Complete setup guide (START HERE!)
-- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - 🔧 Fix common issues
-- **[USER_GUIDE.md](USER_GUIDE.md)** - Complete guide for all users
-- **[ADMIN_MANUAL.md](ADMIN_MANUAL.md)** - Administrator manual
-- **[DATABASE_SETUP.md](DATABASE_SETUP.md)** - Technical setup guide
-- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Development overview
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
-- **[SECURITY.md](SECURITY.md)** - Security policy and reporting
+---
 
-## 🏗️ Technology Stack
+## 🛠️ Built With
 
-- **Frontend**: React 18.3, TypeScript 5.8, Vite 5.4, Tailwind CSS, shadcn/ui
-- **Backend**: Supabase (PostgreSQL, Auth, RLS)
-- **State Management**: React Query, React Context
+- **Frontend**: React 18.3, TypeScript 5.8, Vite 5.4
+- **UI**: Tailwind CSS, shadcn/ui components
+- **Backend**: Supabase (PostgreSQL, Authentication, RLS)
+- **State**: React Query, React Context
 
-## 📧 Support
+---
 
-- 📖 Documentation: See docs above
-- 🐛 Bug Reports: [GitHub Issues](https://github.com/Muqtabis/eduflow-suite/issues)
+## 🔒 Security
+
+- ✅ Row Level Security (RLS) enabled
+- ✅ Secure authentication with Supabase Auth
+- ✅ Role-based access control
+- ✅ Environment variables for credentials
+- ✅ No hardcoded secrets
+
+---
+
+## 📋 Available Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Check code quality
+npm run type-check   # Type check with TypeScript
+npm run format       # Format code with Prettier
+```
+
+---
+
+## 🗂️ Project Structure
+
+```
+Edulogix/
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── contexts/        # React contexts (Auth, etc.)
+│   ├── pages/           # Page components
+│   ├── hooks/           # Custom React hooks
+│   └── integrations/    # Supabase client
+├── supabase/
+│   └── migrations/      # Database migrations
+├── .env.example         # Template for credentials
+├── SETUP.md            # Complete setup guide
+├── CREDENTIALS.md      # Credentials setup guide
+└── package.json        # Dependencies
+```
+
+---
+
+## 🆘 Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| "Invalid API Key" | Check your `.env` file and restart dev server |
+| "Role assignment failed" | Run the auth fix migration (see CREDENTIALS.md) |
+| Stuck on loading screen | User needs a role assigned in database |
+| No data showing | Run the seed data migration (optional) |
+
+**More help**: See [SETUP.md](./SETUP.md) troubleshooting section
+
+---
+
+## 🎯 First Time Setup
+
+1. **Read [SETUP.md](./SETUP.md)** - Complete setup instructions
+2. **Read [CREDENTIALS.md](./CREDENTIALS.md)** - How to add credentials
+3. **Create admin account** - Use "Administrator" role for first user
+4. **Explore the system** - Check out all the features!
+
+---
+
+## 📦 Deployment
+
+### Vercel / Netlify
+```bash
+npm run build
+# Deploy the 'dist' folder
+```
+
+**Don't forget** to add your environment variables:
+- `VITE_SUPABASE_PROJECT_ID`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`
+- `VITE_SUPABASE_URL`
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) first.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see [LICENSE](./LICENSE) file.
+
+---
+
+## 🌟 Support
+
+- 📖 **Documentation**: Check [SETUP.md](./SETUP.md) and other guides
+- 🐛 **Issues**: Report on [GitHub Issues](https://github.com/Muqtabis/Edulogix/issues)
+- 💬 **Questions**: Create a discussion on GitHub
 
 ---
 
