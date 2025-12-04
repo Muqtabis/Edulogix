@@ -1,14 +1,45 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "eduflow-suite",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A comprehensive, full-stack school management system built with modern web technologies",
+  "author": "EduFlow Suite Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Muqtabis/eduflow-suite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Muqtabis/eduflow-suite/issues"
+  },
+  "homepage": "https://github.com/Muqtabis/eduflow-suite#readme",
+  "keywords": [
+    "education",
+    "school-management",
+    "student-management",
+    "react",
+    "typescript",
+    "vite",
+    "supabase",
+    "tailwindcss"
+  ],
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "clean": "rm -rf dist node_modules",
+    "update-browsers": "npx update-browserslist-db@latest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -76,6 +107,7 @@
     "globals": "^15.15.0",
     "lovable-tagger": "^1.1.11",
     "postcss": "^8.5.6",
+    "prettier": "^3.7.4",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",

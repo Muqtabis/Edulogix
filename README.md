@@ -4,6 +4,10 @@
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.3-blue)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF)](https://vitejs.dev/)
+[![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Security](https://img.shields.io/badge/security-policy-blue)](SECURITY.md)
 
 A comprehensive, full-stack school management system built with modern web technologies. EduFlow Suite provides complete solutions for managing students, teachers, academics, finances, and communications in educational institutions.
 
@@ -69,6 +73,32 @@ npm run build
 npm run preview
 ```
 
+## 🛠️ Development
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
+- `npm run type-check` - Run TypeScript type checking
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+
+### Code Quality
+
+The project uses several tools to maintain code quality:
+
+- **ESLint** - JavaScript/TypeScript linting
+- **Prettier** - Code formatting
+- **TypeScript** - Static type checking
+- **GitHub Actions** - Automated CI/CD pipeline
+
+### Contributing
+
+We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
+
 ## 📚 Documentation
 
 Comprehensive documentation is available:
@@ -77,6 +107,8 @@ Comprehensive documentation is available:
 - **[ADMIN_MANUAL.md](ADMIN_MANUAL.md)** - Administrator manual
 - **[DATABASE_SETUP.md](DATABASE_SETUP.md)** - Technical setup guide
 - **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Development overview
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
+- **[SECURITY.md](SECURITY.md)** - Security policy and reporting
 
 ## 🏗️ Technology Stack
 

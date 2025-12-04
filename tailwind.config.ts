@@ -97,5 +97,8 @@ export default {
   		fontFamily: {}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require("tailwindcss-animate")
+  ],
 } satisfies Config;
